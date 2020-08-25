@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import WeatherBox from './components/WeatherBox'
 
-import * as RootNavigation from './RootNavigation.js';
+import * as RootNavigation from "./RootNavigation.js";
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -14,22 +15,35 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.descriptionText}>REMOTE{"\n"}SWITCH</Text>
         <TouchableOpacity
           style={styles.arrow}
-          onPress={() => RootNavigation.navigate("Home")}>
+          onPress={() => RootNavigation.navigate("Home")}
+        >
           <AntDesign name="arrowleft" size={30} color="#5B5A5A" />
         </TouchableOpacity>
-        <TouchableOpacity
-        onPress= {() => RootNavigation.navigate('Setting')}>
 
-          <AntDesign name="setting" color="#5B5A5A" size={30} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            this.setState({ isSwitchTurnOn: !this.state.isSwitchTurnOn })
-          }
-        >
+        <View style={styles.iconContainer}>
+
+          <TouchableOpacity onPress={() => RootNavigation.navigate("Setting")}>
+            <AntDesign name="setting" color="#916FFe" size={30} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => RootNavigation.navigate("Setting")}>
+            <AntDesign name="bells" color="#916FFe" size={30} />
+          </TouchableOpacity>
+
+        </View>
+          <WeatherBox 
+            temperature = '12'
+            weather = 'Sunny'
+            location = 'Ilsan'
+            />
+
+          <TouchableOpacity
+            onPress={() =>
+              this.setState({ isSwitchTurnOn: !this.state.isSwitchTurnOn })
+            }
+          >
+
           <Image
             source={
               this.state.isSwitchTurnOn
@@ -51,20 +65,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#D8D8D8",
   },
+
   icon: {
     width: 185,
     height: 300,
     marginTop: 30,
   },
+
   descriptionText: {
     fontSize: 16,
     color: "#5B5A5A",
     textAlign: "center",
     marginBottom: 40,
   },
+
   arrow: {
     position: "absolute",
     left: 20,
     top: 50,
+  },
+  iconContainer: {
+    flexDirection: "row",
+    position: "absolute",
+    right: 20,
+    top: 60,
   },
 });
