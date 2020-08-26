@@ -22,8 +22,6 @@ export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idText: "이메일",
-      pwText: "비밀번호",
       id: "",
       pw: "",
       keyboard: false,
@@ -68,7 +66,7 @@ export default class LoginScreen extends Component {
         this.setState({loading: false}),
         this.refs.toast.show(
           "잘못된 로그인 정보입니다. 다시 로그인해 주세요",
-          800
+          1500
         )
       );
   };

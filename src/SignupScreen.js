@@ -17,10 +17,11 @@ import FooterButton from "./components/FooterButton";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 import * as firebase from "firebase";
-
+import 'firebase/firestore';
 export default class SignupScreen extends Component {
   constructor(props) {
     super(props);
+    this.ref = firebase.firestore().collection('user');
     this.state = {
       email: "이메일",
       password: "비밀번호",
@@ -36,14 +37,17 @@ export default class SignupScreen extends Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(
-        () => this.setState({ loading: false }),
+        () => 
+        this.setState({ loading: false }),
+        this.ref.doc(this.state.email).set({id: this.state.email}),
         RootNavigation.navigate("Main")
       )
       .catch(
-        () => this.setState({ loading: false }),
+        () => 
+        this.setState({ loading: false }),
         this.refs.toast.show(
           "이메일 형식을 확인해 주세요. \n비밀번호는 6자 이상이어야 합니다.",
-          800
+          2000
         )
       );
   };
@@ -120,6 +124,7 @@ export default class SignupScreen extends Component {
               style={styles.signupButton}
               buttonText="회원가입"
               onPress={this.handleSignUp}
+              
             />
           )}
 

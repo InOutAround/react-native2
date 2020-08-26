@@ -9,26 +9,20 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 export default class WeatherBox extends Component{
-    renderWeatherIcon(weather){
-        switch(weather){
-            case "Sunny":
-                return(
-                    <View style={styles.weatherIcon}>
-                        <Ionicons name='ios-sunny' color="#ffffff" size={80} />
-                    </View>
-                )
-        }
-
-    }
     render(){
         return(
             <View>
                 <Image
                     source={require('./WeatherBox.png')}
                     style={styles.weatherBox} />
-                {this.renderWeatherIcon(this.props.weather)}
+
+                <Image
+                    style={styles.weatherIcon}
+                    source={{uri:`http://openweathermap.org/img/wn/${this.props.weatherIcon}@2x.png`}}
+                />
+
                 <Text style={styles.temperatureText}>
-                    {this.props.temperature}℃
+                    {this.props.temperature}
                 </Text>
                 <Text style={styles.weatherText}>
                     {this.props.weather}
@@ -49,15 +43,15 @@ const styles = StyleSheet.create({
     temperatureText:{
         position: 'absolute',
         color: 'white',
-        fontSize: 30,
+        fontSize: 20,
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 30,
         right: 30,
     },
     weatherText:{
         position: 'absolute',
         color: 'white',
-        fontSize: 30,
+        fontSize: 18,
         textAlign: 'center',
         marginTop: 50,
         right: 30,
@@ -65,16 +59,15 @@ const styles = StyleSheet.create({
     locationText:{
         position: 'absolute',
         color: 'white',
-        fontSize: 30,
+        fontSize: 18,
         textAlign: 'center',
         marginTop: 80,
         right: 30,
     },
     weatherIcon:{
         position: 'absolute',
-        color: 'white',
-        textAlign: 'center',
-        marginTop: 30,
-        left: 30,
+        marginTop: 20,
+        width: 170,
+        height: 90,
     }
 })

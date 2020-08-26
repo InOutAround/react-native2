@@ -24,6 +24,7 @@ const config = {
 if(!firebase.apps.length){
 firebase.initializeApp(config)
 }
+
 const LoginStackScreen = () => {
   return <LoginScreen></LoginScreen>;
 };
